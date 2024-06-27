@@ -1,164 +1,93 @@
-body{
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global styles */
+body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     overflow: hidden;
+    font-family: "Noto Sans Mono", monospace;
 }
 
-.globalContainer{
+.globalContainer {
     background-color: black;
-    width:400px;
-    height:500px;
-    border:10px solid #2F2F2F;
-    display:flex;
+    width: 400px;
+    height: 500px;
+    border: 10px solid #2F2F2F;
+    display: flex;
     flex-direction: column;
-    color:black;
+    color: black;
 }
 
-.rowContainer1{
-    height:50px;
+/* Display area */
+.rowContainer1 {
+    height: 50px;
     flex: 1 1 auto;
     display: flex;
     background-color: #B2B9B7;
-    padding:5px;
-    margin:5px;
+    padding: 5px;
+    margin: 5px;
     border-radius: 5px;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
-    font-size:65px;
-    font-family: "Noto Sans Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: 3s00;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
+    font-size: 65px;
 }
 
-.rowContainer2, .rowContainer3, .rowContainer4, .rowContainer5, .rowContainer6{
-    flex:1 1 auto;
+/* Button containers */
+.rowContainer {
+    flex: 1 1 auto;
     display: flex;
 }
 
-.acCont, .plusMinusCont, .percentageCont, .divideCont{
+/* Common button styles */
+.button {
     flex: 1 1 0;
+    background-color: #217C7E;
+    margin: 2px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* Specific button styles */
+.blue {
     background-color: #1E90FF;
-    margin:2px;
-    border-radius: 5px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Noto Sans Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
-    font-size: 28px;
-    }
+}
 
-.divideCont{
+.active-blue{
+    background-color: #1A7FCC;
+}
+
+.orange {
     background-color: #FF8F1F;
 }
 
-.sevenCont, .eightCont, .nineCont, .multiplyCont{
-    flex: 1 1 0;
+.active-orange {
+    background-color: #E57300;
+}
+
+.turquoise {
     background-color: #217C7E;
-    margin:2px;
-    border-radius: 5px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Noto Sans Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
-    font-size: 28px;    
 }
 
-.multiplyCont{
-    background-color: #FF8F1F;
+.active-turquoise {
+    background-color: #1E6C70;
 }
 
-.fourCont, .fiveCont, .sixCont, .subtractCont{
-    flex: 1 1 0;
-    background-color: #217C7E;
-    margin: 2px;
-    border-radius: 5px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Noto Sans Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
-    font-size: 28px;
-}
-
-.subtractCont{
-    background-color: #FF8F1F;
-}
-
-.oneCont, .twoCont, .threeCont, .addCont{
-    flex: 1 1 0;
-    background-color: #217C7E;
-    margin:2px;
-    border-radius: 5px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Noto Sans Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
-    font-size: 28px;
-}
-
-.addCont{
-    background-color: #FF8F1F;
-}
-
-.zeroCont{
-    width:4px;
+/* Adjustments for specific buttons */
+.zeroCont {
     flex: 2 1 auto;
-    background-color: #217C7E;
-    margin:2px;
-    border-radius: 5px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Noto Sans Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
-    font-size: 28px;
-}
-
-.dotCont, .equalCont{
-    flex: 1 1 0;
-    background-color: #217C7E;
-    margin: 2px;
-    border-radius: 5px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Noto Sans Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
-    font-size: 28px;
-}
-
-.equalCont{
-    background-color: #FF8F1F;
+    width: 4px;
 }

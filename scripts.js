@@ -12,3 +12,97 @@ buttonBgColor.forEach((color)=>{
     });
 });
 
+let number1="";
+let number2="";
+let operator= "";
+let total = 0;
+let flag = 0;
+let display = document.querySelector(".display");
+
+function operate(number1,number2,operator){
+    switch(operator){
+        case "+":
+            return Number(number1)+Number(number2);
+        case "-":
+            return Number(number1)-Number(number2);
+        case "*":
+            return Number(number1)*Number(number2);
+        case "/":
+            return Number(number1)/Number(number2);
+    }
+}
+
+document.querySelectorAll(".button").forEach((button)=>{
+    button.addEventListener("click",(e)=>{
+    if (e.target.classList.contains("number")){
+        if (flag==0) {
+            number1 += e.target.textContent;
+            display.textContent = number1;
+            total = number1;
+        }
+        else if (flag==1){
+            number2 += e.target.textContent;
+            display.textContent = number2;
+            total = operate(number1,number2,operator);
+        }
+    
+    }
+    else if (e.target.classList.contains("operator")){
+        flag=1;
+        if (e.target.classList.contains("addCont")){
+            operator = "+";
+            display.textContent = total;
+            number1=Number(total);
+            number2="";
+        }
+        else if (e.target.classList.contains("subtractCont")){
+            operator = "-";
+            display.textContent = total;
+            number1=Number(total);
+            number2="";
+        }
+        else if (e.target.classList.contains("multiplyCont")){
+            operator = "*";
+            display.textContent = total;
+            number1=Number(total);
+            number2="";
+        }
+        else if (e.target.classList.contains("divideCont")){
+            operator = "/";
+            display.textContent = total;
+            number1=Number(total);
+            number2="";
+        }
+        else if (e.target.classList.contains("plusMinusCont")){
+            operator = "+/-";
+            total = Number(-total);
+            display.textContent = total;
+            number1 = Number(total);
+            number2 = "";
+        }
+        else if (e.target.classList.contains("percentageCont")){
+            operator = "%";
+            total = total/100;
+            display.textContent = total;
+            number1=Number(total);
+            number2="";
+        }
+        else if (e.target.classList.contains("equal")){
+            operator = "=";
+            display.textContent=total;
+            number1 = "";
+            number2 = "";
+            operator = "";
+            flag=0;
+        }
+        else if (e.target.classList.contains("clear")){
+            display.textContent="0";
+            number1 = "";
+            number2 = "";
+            operator = "";
+            flag=0;
+        }
+    }
+
+    })
+})

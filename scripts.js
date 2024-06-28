@@ -99,6 +99,7 @@ document.querySelectorAll(".button").forEach((button)=>{
             display.textContent="0";
             number1 = "";
             number2 = "";
+            total = "";
             operator = "";
             flag=0;
         }

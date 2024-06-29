@@ -18,6 +18,7 @@ let operator= "";
 let total = 0;
 let flag = 0;
 let display = document.querySelector(".display");
+let displayTotal = 0;
 
 function operate(number1,number2,operator){
     switch(operator){
@@ -32,20 +33,45 @@ function operate(number1,number2,operator){
     }
 }
 
+function handleOverflow(total){
+    count=0;
+    if (Number(total)>1 || Number(total)<-1){
+        let answer=0;
+        while(Math.trunc(Number(total)).toString().length!=1){
+            total /= 10;
+            count++;
+            answer = total.toFixed(2)+"e"+count;
+        }
+        if (answer.length<=9) return answer;
+        else return "overflow";
+    }
+}
+
 document.querySelectorAll(".button").forEach((button)=>{
     button.addEventListener("click",(e)=>{
     if (e.target.classList.contains("number")){
         if (flag==0) {
             if (display.textContent=="0" && e.target.textContent=="0") return; //Handling Zeroes for first number
-            number1 += e.target.textContent;
-            display.textContent = number1;
-            total = number1;
+            if (display.textContent.length!=8){
+                number1 += e.target.textContent;
+                display.textContent = number1;
+                total = number1;
+                displayTotal = number1;
+            }
         }
         else if (flag==1){
-            if (e.target.textContent=="0") {display.textContent="0"; number2=""; return;} //Handling Zeroes for second number
-            number2 += e.target.textContent;
-            display.textContent = number2;
-            total = operate(number1,number2,operator);
+            if (number2=="0") {display.textContent="0"; number2=""; return;} //Handling Zeroes for second number
+            if (display.textContent.length!=8 || number2==""){
+                number2 += e.target.textContent;
+                display.textContent = number2;
+                total = operate(number1,number2,operator);
+            }
+            if (total.toString().length>9){
+                displayTotal = handleOverflow(total);
+            }
+            else{
+                displayTotal = total;
+            }
 
         }
     
@@ -54,45 +80,51 @@ document.querySelectorAll(".button").forEach((button)=>{
         flag=1;
         if (e.target.classList.contains("addCont")){
             operator = "+";
-            display.textContent = total;
+            display.textContent = displayTotal;
             number1=Number(total);
             number2="";
         }
         else if (e.target.classList.contains("subtractCont")){
             operator = "-";
-            display.textContent = total;
+            display.textContent = displayTotal;
             number1=Number(total);
             number2="";
         }
         else if (e.target.classList.contains("multiplyCont")){
             operator = "*";
-            display.textContent = total;
+            display.textContent = displayTotal;
             number1=Number(total);
             number2="";
         }
         else if (e.target.classList.contains("divideCont")){
             operator = "/";
-            display.textContent = total;
+            display.textContent = displayTotal;
             number1=Number(total);
             number2="";
         }
         else if (e.target.classList.contains("plusMinusCont")){
             operator = "+/-";
             total = Number(-total);
-            display.textContent = total;
+            if (total.toString().length>9){
+                displayTotal = handleOverflow(total);
+            }
+            else{
+                displayTotal = total;
+            }
+            display.textContent = displayTotal;
             number1 = Number(total);
             number2 = "";
         }
         else if (e.target.classList.contains("percentageCont")){
             operator = "%";
             total = total/100;
-            display.textContent = total;
+            display.textContent = displayTotal;
             number1=Number(total);
             number2="";
         }
         else if (e.target.classList.contains("equal")){
             operator = "=";
-            display.textContent=total;
+            display.textContent=displayTotal;
             number1 = "";
             number2 = "";
             operator = "";
@@ -103,6 +135,7 @@ document.querySelectorAll(".button").forEach((button)=>{
             number1 = "";
             number2 = "";
             total = "";
+            displayTotal = "";
             operator = "";
             flag=0;
         }

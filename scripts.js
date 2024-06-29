@@ -17,6 +17,7 @@ let number2="";
 let operator= "";
 let total = 0;
 let flag = 0;
+let pointFlag = 0;
 let display = document.querySelector(".display");
 let displayTotal = 0;
 
@@ -34,10 +35,9 @@ function operate(number1,number2,operator){
 }
 
 function handleOverflow(total){
-    count=0;
+    let count=0;
     if (Math.abs(total) >= 1) {
         let answer=0;
-        if (Math.abs(total)<=100000) return total.toFixed(2);
         while (Math.abs(total) >= 10) {
             total /= 10;
             count++;
@@ -47,8 +47,8 @@ function handleOverflow(total){
         else return "overflow";
     }
     else if (Math.abs(total) > 0 && Math.abs(total) < 1) {
+        if (Math.abs(total)*100000>10000) return total.toFixed(2);
         let answer=0;
-        if (Math.abs(total)*1000>1) return total.toFixed(2)
         while (Math.abs(total) < 1) {
             total *= 10;
             count++;
@@ -65,6 +65,8 @@ document.querySelectorAll(".button").forEach((button)=>{
         if (flag==0) {
             if (display.textContent=="0" && e.target.textContent=="0") return; //Handling Zeroes for first number
             if (display.textContent.length!=8){
+                if (pointFlag==1 && e.target.classList.contains("point")) return;
+                if (e.target.classList.contains("point")) pointFlag=1;
                 number1 += e.target.textContent;
                 display.textContent = number1;
                 total = number1;
@@ -77,6 +79,7 @@ document.querySelectorAll(".button").forEach((button)=>{
                 number2 += e.target.textContent;
                 display.textContent = number2;
                 total = operate(number1,number2,operator);
+            
             }
             if (total.toString().length>9){
                 displayTotal = handleOverflow(total);

@@ -123,7 +123,12 @@ document.querySelectorAll(".button").forEach((button)=>{
         else if (e.target.classList.contains("percentageCont")){
             operator = "%";
             total = total/100;
-            displayTotal = total;
+            if (total.toString().length>9){
+                displayTotal = handleOverflow(total);
+            }
+            else{
+                displayTotal = total;
+            }
             display.textContent = displayTotal;
             number1=Number(total);
             number2="";

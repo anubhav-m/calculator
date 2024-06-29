@@ -36,14 +36,17 @@ document.querySelectorAll(".button").forEach((button)=>{
     button.addEventListener("click",(e)=>{
     if (e.target.classList.contains("number")){
         if (flag==0) {
+            if (display.textContent=="0" && e.target.textContent=="0") return; //Handling Zeroes for first number
             number1 += e.target.textContent;
             display.textContent = number1;
             total = number1;
         }
         else if (flag==1){
+            if (e.target.textContent=="0") {display.textContent="0"; number2=""; return;} //Handling Zeroes for second number
             number2 += e.target.textContent;
             display.textContent = number2;
             total = operate(number1,number2,operator);
+
         }
     
     }

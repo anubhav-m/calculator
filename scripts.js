@@ -63,7 +63,7 @@ document.querySelectorAll(".button").forEach((button)=>{
     button.addEventListener("click",(e)=>{
     if (e.target.classList.contains("number")){
         if (flag==0) {
-            if (display.textContent=="0" && e.target.textContent=="0") return; //Handling Zeroes for first number
+            if (display.textContent=="0" && e.target.textContent=="0") return;
             if (display.textContent.length!=8){
                 if (pointFlag==1 && e.target.classList.contains("point")) return;
                 if (e.target.classList.contains("point")) pointFlag=1;
@@ -74,8 +74,10 @@ document.querySelectorAll(".button").forEach((button)=>{
             }
         }
         else if (flag==1){
-            if (number2=="0") {display.textContent="0"; number2=""; return;} //Handling Zeroes for second number
+            if (number2=="0") {display.textContent="0"; number2=""; return;}
             if (display.textContent.length!=8 || number2==""){
+                if (pointFlag==1 && e.target.classList.contains("point")) return;
+                if (e.target.classList.contains("point")) pointFlag=1;
                 number2 += e.target.textContent;
                 display.textContent = number2;
                 total = operate(number1,number2,operator);
@@ -93,6 +95,7 @@ document.querySelectorAll(".button").forEach((button)=>{
     }
     else if (e.target.classList.contains("operator")){
         flag=1;
+        pointFlag=0;
         if (e.target.classList.contains("addCont")){
             operator = "+";
             display.textContent = displayTotal;
@@ -117,25 +120,10 @@ document.querySelectorAll(".button").forEach((button)=>{
             number1=Number(total);
             number2="";
         }
-        else if (e.target.classList.contains("plusMinusCont")){
-            if (total!=0){
-                operator = "+/-";
-                total = Number(-total);
-                if (total.toString().length>9){
-                    displayTotal = handleOverflow(total);
-                }
-                else{
-                    displayTotal = total;
-                }
-                display.textContent = displayTotal;
-                number1 = Number(total);
-                number2 = "";
-            }
-            else flag=0;
-        }
         else if (e.target.classList.contains("percentageCont")){
             operator = "%";
             total = total/100;
+            displayTotal = total;
             display.textContent = displayTotal;
             number1=Number(total);
             number2="";

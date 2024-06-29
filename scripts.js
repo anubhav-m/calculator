@@ -35,14 +35,26 @@ function operate(number1,number2,operator){
 
 function handleOverflow(total){
     count=0;
-    if (Number(total)>1 || Number(total)<-1){
+    if (Math.abs(total) >= 1) {
         let answer=0;
-        while(Math.trunc(Number(total)).toString().length!=1){
+        if (Math.abs(total)<=100000) return total.toFixed(2);
+        while (Math.abs(total) >= 10) {
             total /= 10;
             count++;
-            answer = total.toFixed(2)+"e"+count;
+            answer = total.toFixed(2)+"e+"+count;
         }
         if (answer.length<=9) return answer;
+        else return "overflow";
+    }
+    else if (Math.abs(total) > 0 && Math.abs(total) < 1) {
+        let answer=0;
+        if (Math.abs(total)*1000>1) return total.toFixed(2)
+        while (Math.abs(total) < 1) {
+            total *= 10;
+            count++;
+        }
+        answer = total.toFixed(2) + "e-" + count;
+        if (answer.length <= 9) return answer;
         else return "overflow";
     }
 }
@@ -103,17 +115,20 @@ document.querySelectorAll(".button").forEach((button)=>{
             number2="";
         }
         else if (e.target.classList.contains("plusMinusCont")){
-            operator = "+/-";
-            total = Number(-total);
-            if (total.toString().length>9){
-                displayTotal = handleOverflow(total);
+            if (total!=0){
+                operator = "+/-";
+                total = Number(-total);
+                if (total.toString().length>9){
+                    displayTotal = handleOverflow(total);
+                }
+                else{
+                    displayTotal = total;
+                }
+                display.textContent = displayTotal;
+                number1 = Number(total);
+                number2 = "";
             }
-            else{
-                displayTotal = total;
-            }
-            display.textContent = displayTotal;
-            number1 = Number(total);
-            number2 = "";
+            else flag=0;
         }
         else if (e.target.classList.contains("percentageCont")){
             operator = "%";

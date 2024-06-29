@@ -23,6 +23,7 @@ body {
     display: flex;
     flex-direction: column;
     color: black;
+    border-radius: 10px;
 }
 
 /* Display area */

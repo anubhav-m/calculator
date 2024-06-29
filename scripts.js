@@ -67,10 +67,22 @@ document.querySelectorAll(".button").forEach((button)=>{
             if (display.textContent.length!=8){
                 if (pointFlag==1 && e.target.classList.contains("point")) return;
                 if (e.target.classList.contains("point")) pointFlag=1;
-                number1 += e.target.textContent;
-                display.textContent = number1;
-                total = number1;
-                displayTotal = number1;
+                if (e.target.classList.contains("clearEntered")){
+                    if (number1.at(-1)=="."){
+                        pointFlag=0;
+                    }
+                    number1 = number1.slice(0,-1);
+                    display.textContent = number1;
+                    total = number1;
+                    displayTotal = number1;
+                    if (number1.length==0) display.textContent = "0";
+                }
+                else{
+                    number1 += e.target.textContent;
+                    display.textContent = number1;
+                    total = number1;
+                    displayTotal = number1;
+                }
             }
         }
         else if (flag==1){
@@ -78,10 +90,20 @@ document.querySelectorAll(".button").forEach((button)=>{
             if (display.textContent.length!=8 || number2==""){
                 if (pointFlag==1 && e.target.classList.contains("point")) return;
                 if (e.target.classList.contains("point")) pointFlag=1;
-                number2 += e.target.textContent;
-                display.textContent = number2;
-                total = operate(number1,number2,operator);
-            
+                if (e.target.classList.contains("clearEntered")){
+                    if (number2.at(-1)=="."){
+                        pointFlag=0;
+                    }
+                    number2 = number2.slice(0,-1);
+                    display.textContent = number2;
+                    total = operate(number1,number2,operator);
+                    if (number2.length==0) display.textContent = "0";
+                }
+                else{
+                    number2 += e.target.textContent;
+                    display.textContent = number2;
+                    total = operate(number1,number2,operator);
+                }
             }
             if (total.toString().length>9){
                 displayTotal = handleOverflow(total);

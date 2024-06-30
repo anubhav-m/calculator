@@ -12,6 +12,7 @@ buttonBgColor.forEach((color)=>{
     });
 });
 
+
 let number1="";
 let number2="";
 let operator= "";
@@ -176,3 +177,38 @@ document.querySelectorAll(".button").forEach((button)=>{
 
     })
 })
+
+// Adding keyboard support
+const keyMap = {
+    '0': 'zeroCont',
+    '1': 'oneCont',
+    '2': 'twoCont',
+    '3': 'threeCont',
+    '4': 'fourCont',
+    '5': 'fiveCont',
+    '6': 'sixCont',
+    '7': 'sevenCont',
+    '8': 'eightCont',
+    '9': 'nineCont',
+    '.': 'point',
+    '+': 'addCont',
+    '-': 'subtractCont',
+    '*': 'multiplyCont',
+    '/': 'divideCont',
+    '%': 'percentageCont',
+    'Enter': 'equal',
+    '=': 'equal',
+    'Backspace': 'clearEntered',
+    'Escape': 'clear'
+};
+
+function triggerButtonClick(key) {
+    const buttonClass = keyMap[key];
+    if (buttonClass) {
+        document.querySelector(`.${buttonClass}`).click();
+    }
+}
+
+document.addEventListener('keydown', (e) => {
+    triggerButtonClick(e.key);
+});
